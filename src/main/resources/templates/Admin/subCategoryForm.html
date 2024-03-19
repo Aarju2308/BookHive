@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="Admin/admin" lang="en">
+<head>
+
+</head>
+
+<body id="page-top">
+
+	<!-- Begin Page Content -->
+	<div layout:fragment="content" class="container-fluid">
+
+		<form method="post" th:object="${WrapperModel}" th:action="@{save}">
+			<div class="container-fluid">
+			
+				<div th:if="${status == 'exist'}" class="alert alert-danger" role="alert">
+				 	This Category Already Exists In Database
+				</div>
+				
+				<div th:if="${status == 'success'}" class="alert alert-success" role="alert">
+				 	Category Added Successfully.
+				</div>
+			
+				<div class="card">
+					<div
+						class="card-header py-3 d-flex justify-content-between align-items-center">
+						<h6 class="m-0 font-weight-bold h5 text-primary">Sub Category Form</h6>
+						<a th:href="@{/SubCategory/list}" class="btn btn-danger "><i
+							class="fa fa-arrow-left pr-2"></i>Back</a>
+					</div>
+					<div class="card-body">
+						<input type="hidden" th:field="*{singleSubCategory.subCatId}">
+						
+						<div class="form-group">
+							<label>Category</label> <select th:field="*{singleSubCategory.category.catId}"
+								name="dropCategory" class="form-control">
+								<option th:each="cat : ${WrapperModel.allCategories}" th:value="${cat.catId}" th:text="${cat.name}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Sub Category Name</label> <input type="text"
+								th:field="*{singleSubCategory.name}" name="txtCategory" id="txtCategory"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Status</label> <select th:field="*{singleSubCategory.status}"
+								name="dropStatus" class="form-control">
+								<option value="1">Active</option>
+								<option value="0">De-Active</option>
+							</select>
+						</div>
+					</div>
+					<div class="card-footer text-center">
+						<button type="submit" class="btn btn-primary btn-lg"
+							name="btnSave">
+							<i class="fa fa-save"></i> Save
+						</button>
+						<a th:href="@{/subCategory/addForm}" class="btn btn-danger btn-lg"><i
+							class="fa fa-times"></i> Cancel</a>
+					</div>
+
+				</div>
+			</div>
+		</form>
+
+	</div>
+	<!-- /.container-fluid -->
+
+
+</body>
+</html>

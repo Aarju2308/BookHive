@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="Admin/admin">
+
+
+
+<body id="page-top">
+
+	<div layout:fragment="content" class="container-fluid">
+	
+		<ul>
+		  <li th:each="item : ${WrapperModel}" > <i style="font-weight: bold;" th:text="${item.name}"></i>  </li>
+		</ul>
+	
+		<div class="text-center">
+			<div class="error mx-auto" data-text="404">404</div>
+			<p class="lead text-gray-800 mb-5">Category Already Exists</p>
+			<p class="text-gray-500 mb-0">It looks like you found are trying to make a duplicate entry...</p>
+			<a th:href="@{/category/list}">&larr; Back to Category List</a>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

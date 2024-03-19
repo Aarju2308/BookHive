@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="Admin/admin">
+
+<body id="page-top">
+
+
+	<div layout:fragment="content" class="container-fluid">
+
+		<!-- Page Heading -->
+		<h1 class="h3 mb-2 text-gray-800">Products List</h1>
+
+		<!-- DataTales Example -->
+		<div class="card shadow mb-4">
+			<div
+				class="card-header py-3 d-flex justify-content-between align-items-center">
+				<h6 class="m-0 font-weight-bold text-primary">Products List</h6>
+				<a th:href="@{/Product/addForm}" class="btn btn-primary "><i
+					class="fa fa-plus"></i> Add New</a>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>Product Id</th>
+								<th>Category</th>
+								<th>Sub Category</th>
+								<th>Title</th>
+								<th>Cover Image</th>
+								<th>Status</th>
+								<th>Edit</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product : ${Products}">
+								<td th:text="${product.productId}"></td>
+								<td th:text="${product.category.name}"></td>
+								<td th:text="${product.subCategory.name}"></td>
+								<td th:text="${product.Title}"></td>
+								<td><img style="width: 50px;" th:src="@{'/img/BookCovers/' + ${product.coverImage}}"> </td>
+								<td th:if="${product.status} == 1">Active</td>
+								<td th:if="${product.status} == 0">De Active</td>
+								<td><a th:href="@{/Product/updateForm(productId=${product.productId})}"
+									class="btn btn-warning">Edit</a></td>
+								<td><a
+									onclick="return confirm('Are you sure you want to delete !!')"
+									th:href="@{/Product/delete(productId=${product.productId})}"
+									class="btn btn-danger">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

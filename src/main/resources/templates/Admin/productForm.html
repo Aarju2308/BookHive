@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="Admin/admin" lang="en">
+<head>
+
+</head>
+
+<body id="page-top">
+
+	<!-- Begin Page Content -->
+	<div layout:fragment="content" class="container-fluid">
+		
+		<div th:if="${status == 'exist'}" class="alert alert-danger" role="alert">
+				 	This Category Already Exists In Database
+		</div>
+		
+		<div th:if="${status == 'failed'}" class="alert alert-danger" role="alert">
+				Something Went Wrong
+		</div>
+		
+		<div th:if="${status == 'success'}" class="alert alert-success" role="alert">
+		 	Category Added Successfully.
+		</div>
+
+		<form method="post" th:object="${Wrapper}" th:action="@{save}" enctype="multipart/form-data" >
+			<div class="container-fluid">
+				<div class="card">
+					<div
+						class="card-header py-3 d-flex justify-content-between align-items-center">
+						<h6 class="m-0 font-weight-bold h5 text-primary">Product Form</h6>
+						<a th:href="@{/Product/list}" class="btn btn-danger "><i
+							class="fa fa-arrow-left pr-2"></i>Back</a>
+					</div>
+					<div class="card-body">
+						<input type="hidden" th:field="*{singleProduct.productId}">
+						
+						<div class="form-group">
+							<label>Category</label> 
+							<select th:onchange="getSubCat(this.value)" id="category" th:field="*{singleProduct.category.catId}" name="dropCategory" class="form-control">
+								<option th:each="cat : ${Wrapper.allCategories}" th:value="${cat.catId}" th:text="${cat.name}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Sub Category</label> <select id="dropSubCategory" th:field="*{singleProduct.subCategory.subCatId}"
+								name="dropCategory" class="form-control">
+									<option th:each="subCat : ${Wrapper.allSubCategories}" th:value="${subCat.subCatId}" th:text="${subCat.name}"></option>
+								</select>
+						</div>
+						<div class="form-group">
+							<label>Title</label> 
+							<input type="text"
+								th:field="*{singleProduct.title}" name="txtTitle" id="txtTitle"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Author</label> 
+							<input type="text"
+								th:field="*{singleProduct.author}" name="txtAuthor" id="txtAuthor"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Price</label> 
+							<input type="text"
+								th:field="*{singleProduct.price}" name="txtPrice" id="txtPrice"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Description</label> 
+							<input type="text"
+								th:field="*{singleProduct.description}" name="txtDesc" id="txtDesc"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Book Cover Image</label> 
+							<input type="hidden" th:field="*{singleProduct.coverImage}" >
+							<input type="file"
+								name="coverImage" id="coverImage"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Publication Date</label> 
+							<input type="date"
+								th:field="*{singleProduct.publicationDate}" name="txtDate" id="txtDate"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Status</label> <select th:field="*{singleProduct.status}"
+								name="dropStatus" class="form-control">
+								<option value="1">Active</option>
+								<option value="0">De-Active</option>
+							</select>
+						</div>
+					</div>
+					<div class="card-footer text-center">
+						<button type="submit" class="btn btn-primary btn-lg"
+							name="btnSave">
+							<i class="fa fa-save"></i> Save
+						</button>
+						<a th:href="@{/Product/addForm}" class="btn btn-danger btn-lg"><i
+							class="fa fa-times"></i> Cancel</a>
+					</div>
+
+				</div>
+			</div>
+		</form>
+
+	</div>
+	<!-- /.container-fluid -->
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+</body>
+</html>

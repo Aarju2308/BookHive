@@ -14,7 +14,7 @@ public class FileUploadUtil {
 	
 	public static void saveFile(String fileName, MultipartFile file) {
 		
-		Path uploadPath = Paths.get("/Users/aarjupatel/Downloads/Test Spring/bookhive/src/main/resources/static/img/BookCovers");
+		Path uploadPath = Paths.get("/images");
 		
 		try (InputStream inputStream = file.getInputStream()){
 			

@@ -41,7 +41,7 @@
 								<td th:text="${product.category.name}"></td>
 								<td th:text="${product.subCategory.name}"></td>
 								<td th:text="${product.Title}"></td>
-								<td><img style="width: 50px;" th:src="@{'/img/BookCovers/' + ${product.coverImage}}"> </td>
+								<td><img style="width: 50px;" src="/images/ + ${product.coverImage}"> </td>
 								<td th:if="${product.status} == 1">Active</td>
 								<td th:if="${product.status} == 0">De Active</td>
 								<td><a th:href="@{/Product/updateForm(productId=${product.productId})}"
